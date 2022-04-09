@@ -1,9 +1,19 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-require('dotenv').config()
-app.get('/', (req,res) => {
-    res.send('Hello world')
-})
+const connectDb = require("./config/db");
+require("dotenv").config();
 
+connectDb();
 
-app.listen(process.env.PORT)
+app.use(express.json({ extended: false }));
+
+app.get("/", (req, res) => {
+  res.send("Hello world");
+});
+
+app.use("/api/users", require("./routes/api/users"));
+app.use("/api/auth", require("./routes/api/auth"));
+app.use("/api/profile", require("./routes/api/profile"));
+app.use("/api/posts", require("./routes/api/posts"));
+
+app.listen(process.env.PORT);
