@@ -4,7 +4,12 @@ const { check, validationResult } = require("express-validator");
 const router = express.Router();
 const Profile = require("../../models/Profile");
 const User = require("../../models/User");
-const _ = require('lodash')
+const _ = require("lodash");
+const axios = require('axios')
+require("dotenv").config();
+
+
+
 //@route      GET api/profile/me
 //@desc       get current user profile
 //@access     private
@@ -237,8 +242,9 @@ router.put("/experience/:exp_id", auth, async (req, res) => {
     const profile = await Profile.findOne({ user: req.user.id });
     let editedExp = getNewExp();
     _.chain(profile.experience)
-    .find(el => el.id === req.params.exp_id)
-    .merge({...editedExp}).value();
+      .find((el) => el.id === req.params.exp_id)
+      .merge({ ...editedExp })
+      .value();
     await profile.save();
     res.json(profile);
   } catch (e) {
@@ -263,6 +269,136 @@ router.delete("/experience/:exp_id", auth, async (req, res) => {
     console.log(profile);
     res.json(profile);
   } catch (error) {
+    res.status(500).send("Internal server error");
+  }
+});
+
+//@route      PUT api/profile/education
+//@desc       add profile education
+//@access     private
+
+router.put(
+  "/education",
+  [
+    auth,
+    [
+      check("school", "School is required").not().isEmpty(),
+      check("degree", "Degree is required").not().isEmpty(),
+      check("from", "Start date is required").not().isEmpty(),
+      check("fieldofstudy", "Field of study is required").not().isEmpty(),
+    ],
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.status(400).json({ errors: errors.array() });
+    }
+    function getNewEdu() {
+      let newEdu = {};
+      for (let key in req.body) {
+        switch (key) {
+          case "school":
+          case "degree":
+          case "fieldofstudy":
+          case "from":
+          case "to":
+          case "current":
+          case "description":
+            newEdu[key] = req.body[key];
+            break;
+          default:
+            return newEdu;
+        }
+      }
+      console.log(newEdu);
+      return newEdu;
+    }
+    try {
+      const profile = await Profile.findOne({ user: req.user.id });
+      console.log(req.user.id);
+      profile.education.unshift(getNewEdu());
+      await profile.save();
+      res.json(profile);
+    } catch (e) {
+      console.error(e.message);
+      res.status(500).send("Internal server error");
+    }
+  }
+);
+
+//@route      PUT api/profile/education/edu_id
+//@desc       edit profile education
+//@access     private
+
+router.put("/education/:edu_id", auth, async (req, res) => {
+  function getEditedEdu() {
+    let newEdu = {};
+    for (let key in req.body) {
+      switch (key) {
+        case "school":
+        case "degree":
+        case "fieldofstudy":
+        case "from":
+        case "to":
+        case "current":
+        case "description":
+          newEdu[key] = req.body[key];
+          break;
+        default:
+          return newEdu;
+      }
+    }
+    return newEdu;
+  }
+  try {
+    const profile = await Profile.findOne({ user: req.user.id });
+    let editedEdu = getEditedEdu();
+    _.chain(profile.education)
+      .find((el) => el.id === req.params.edu_id)
+      .merge({ ...editedEdu })
+      .value();
+    await profile.save();
+    res.json(profile);
+  } catch (e) {
+    console.error(e.message);
+    res.status(500).send("Internal server error");
+  }
+});
+
+//@route      DELETE api/profile/education/:edu_id
+//@desc       delete education
+//@access     private
+
+router.delete("/education/:edu_id", auth, async (req, res) => {
+  try {
+    let profile = await Profile.findOne({ user: req.user.id });
+    let deleteIndex = profile.education
+      .map((el) => el.id)
+      .indexOf(req.params.exp_id);
+    profile.education.splice(deleteIndex, 1);
+    await profile.save();
+    console.log(profile);
+    res.json(profile);
+  } catch (error) {
+    res.status(500).send("Internal server error");
+  }
+});
+
+//@route      GET api/profile/github/:username
+//@desc       get github repos by username
+//@access     public
+
+router.get("/github/:username", async (req, res) => {
+  try {
+    let url = `https://api.github.com/users/${req.params.username}/repos?per_page=5&
+    sort=created:asc&client_id=${process.env.GITHUB_CLIENT_ID}&
+    client_secret=${process.env.GITHUB_CLIENT_SECRET}`;
+    let response = await axios.get(url);
+    if(response.status !== 200){
+      return res.status(404).json({msg:'User not found'});
+    }
+    res.json(response.data);
+  } catch (err) {
     res.status(500).send("Internal server error");
   }
 });
