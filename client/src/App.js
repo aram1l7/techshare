@@ -1,8 +1,8 @@
 import React from 'react'
-import './css/index.css'
+import './css/index.scss'
 function App() {
   return (
-    <div className="flex m-10 bg-gray-600">
+    <div className="flex m-10 bg-gray-600 container page-header">
       <header className="App-header">
         Hey
       </header>
