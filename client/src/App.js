@@ -1,12 +1,12 @@
-import React from 'react'
-import './css/index.scss'
+import React from "react";
+import Routes from "routes";
+import { BrowserRouter as Router } from "react-router-dom";
+import "./css/index.scss";
 function App() {
   return (
-    <div className="flex m-10 bg-gray-600 container page-header">
-      <header className="App-header">
-        Hey
-      </header>
-    </div>
+    <Router>
+      <Routes />
+    </Router>
   );
 }
 
