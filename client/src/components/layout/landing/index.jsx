@@ -1,11 +1,9 @@
 import React from "react";
-import Navbar from "../navbar";
 import illustration from "images/illustration.png";
 import { Link } from "react-router-dom";
 function Landing() {
   return (
     <>
-      <Navbar />
       <section className="landing flex flex-col lg:flex-row items-center justify-center lg:justify-between pl-10">
         <div className="content">
           <div className="flex justify-center items-center">
