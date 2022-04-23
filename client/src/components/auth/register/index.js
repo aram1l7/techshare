@@ -105,7 +105,7 @@ function Register() {
           </div>
           <p className="mt-4">
             Already have an account ?{" "}
-            <Link className="underline" to="/login">
+            <Link className="underline text-sky-500" to="/login">
               Login
             </Link>
           </p>

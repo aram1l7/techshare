@@ -66,7 +66,7 @@ function Login() {
           </div>
           <p className="mt-4">
             Don't have an account ?{" "}
-            <Link className="underline" to="/register">
+            <Link className="underline text-sky-500" to="/register">
               Sign Up
             </Link>
           </p>
