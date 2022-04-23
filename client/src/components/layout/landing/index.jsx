@@ -1,5 +1,5 @@
 import React from "react";
-import illustration from "images/illustration.png";
+import illustration from "assets/images/illustration.png";
 import { Link } from "react-router-dom";
 function Landing() {
   return (

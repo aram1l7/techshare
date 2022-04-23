@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import register from "images/register.svg";
-function Register() {
+import login from "assets/images/login.svg";
+
+function Login() {
   const [formData, setFormData] = useState({
-    name: "",
     email: "",
     password: "",
-    confirmPassword: "",
   });
-  const { name, email, password, confirmPassword } = formData;
+  const { email, password } = formData;
   const onFormChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -18,41 +17,20 @@ function Register() {
       [name]: value,
     });
   };
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [isPasswordOpen, setIsPasswordOpen] = useState(false);
-  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
-
-  useEffect(() => {
-    if (name.length >= 3 && password.length >= 3) {
-      setIsButtonDisabled(false);
-    }
-  }, [formData]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      return;
-    }
   };
 
   return (
-    <div className="flex justify-center items-center flex-col min-h-screen px-8 pt-10">
-      <div className="flex gap-10 flex-col-reverse md:flex-row">
+    <div className="flex justify-center items-center flex-col min-h-screen px-8 pt-10 sm:pt-0">
+      <div className="flex flex-col-reverse gap-10 sm:flex-row">
         <form
           onSubmit={(e) => handleSubmit(e)}
           className="form-container mt-10 w-full flex flex-col justify-between"
         >
-          <h2 className="mt-5 font-semibold ml-2 text-lg">Create an account</h2>
-          <div className="form-input">
-            <input
-              className="w-full border-0 outline-none border-b-2 border-solid p-3"
-              type="text"
-              name="name"
-              value={name}
-              placeholder="Name"
-              onChange={(e) => onFormChange(e)}
-            />
-          </div>
+          <h2 className="text-lg ml-2 mt-5 font-semibold">Sign In</h2>
           <div className="form-input">
             <input
               className="w-full border-0 outline-none border-b-2 border-solid p-3"
@@ -78,44 +56,28 @@ function Register() {
               icon={isPasswordOpen ? faEye : faEyeSlash}
             />
           </div>
-          <div className="form-input flex items-center border-b-2 border-solid">
-            <input
-              className="w-full border-0 outline-none  p-3"
-              type={`${isConfirmOpen ? "text" : "password"}`}
-              name="confirmPassword"
-              value={confirmPassword}
-              placeholder="Confirm password"
-              onChange={(e) => onFormChange(e)}
-            />
-            <FontAwesomeIcon
-              className="cursor-pointer"
-              onClick={() => setIsConfirmOpen(!isConfirmOpen)}
-              icon={isConfirmOpen ? faEye : faEyeSlash}
-            />
-          </div>
           <div className="mt-5">
             <input
               type="submit"
-              value="Create account"
-              disabled={isButtonDisabled}
+              value="Log in"
               className="submit px-4 py-2 rounded-lg
               cursor-pointer
               bg-green-500 text-white shadow disabled:opacity-50"
             />
           </div>
           <p className="mt-4">
-            Already have an account ?{" "}
-            <Link className="underline text-sky-500" to="/login">
-              Login
+            Don't have an account ?{" "}
+            <Link className="underline text-sky-500" to="/register">
+              Sign Up
             </Link>
           </p>
         </form>
         <div className="max-w-sm">
-          <img className="w-full h-full object-contain" src={register} />
+          <img className="w-full h-full object-contain" src={login} />
         </div>
       </div>
     </div>
   );
 }
 
-export default Register;
+export default Login;
