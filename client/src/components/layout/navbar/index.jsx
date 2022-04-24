@@ -1,14 +1,14 @@
 import React from "react";
-import icon from "images/icons/logo.svg";
+import icon from "assets/images/icons/logo2.svg";
 import { Link } from "react-router-dom";
 function Navbar() {
   return (
-    <nav className="navbar w-full flex shadow justify-between items-center px-10 py-4">
+    <nav className="navbar w-full flex shadow justify-between items-center px-10 lg:px-24 py-4">
       <div className="flex gap-2 items-center">
-        <Link to="/" className="w-10 h-10">
+        <Link to="/" className="flex items-center gap-2">
           <img src={icon} alt="logo" />
+          <h3 className="font-bold text-2xl">TS</h3>
         </Link>
-        <h3>DevConnect</h3>
       </div>
       <div className="flex justify-between gap-5">
         <div>

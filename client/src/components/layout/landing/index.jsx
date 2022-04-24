@@ -4,15 +4,15 @@ import { Link } from "react-router-dom";
 function Landing() {
   return (
     <>
-      <section className="landing flex flex-col lg:flex-row items-center justify-center lg:justify-between pl-10">
+      <section className="landing flex flex-col lg:flex-row items-center justify-center lg:justify-evenly pl-10">
         <div className="content">
           <div className="flex justify-center items-center">
             <div>
               <h1 className="drop-shadow-md font-bold text-5xl">
-                DevConnect
+                Tech Share
               </h1>
               <p className="mt-5 text-xl font-medium">
-                DevConnect is a social platform for developers <br /> where
+                Tech Share is a social platform for developers <br /> where
                 people share posts connect with <br /> each other and share with
                 their experience.
               </p>
