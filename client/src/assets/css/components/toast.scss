@@ -1,0 +1,29 @@
+.toaster {
+  width: auto !important;
+  .toaster-item {
+    color: #fff !important;
+    padding: 8px 16px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    letter-spacing: 0.001em;
+    min-height: 32px;
+    opacity: 1;
+    box-shadow: 0 4px 8px rgb(0 0 0 / 12%);
+    border-radius: 4px;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  .toaster-success {
+    background-color: #5bcc60 !important;
+  }
+
+  .toaster-info {
+    background-color: #a0abad !important;
+  }
+
+  .toaster-error {
+    background-color: #f35353 !important;
+  }
+}

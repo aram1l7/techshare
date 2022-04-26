@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import register from "assets/images/register.svg";
+import toast from "helpers/toast";
 function Register() {
   const [formData, setFormData] = useState({
     name: "",
@@ -31,7 +32,8 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      return;
+      console.log('asdasdasd');
+      toast.success('Passwords do not match');
     }
   };
 
@@ -100,7 +102,7 @@ function Register() {
               disabled={isButtonDisabled}
               className="submit px-4 py-2 rounded-lg
               cursor-pointer
-              bg-green-500 text-white shadow disabled:opacity-50"
+              bg-green text-white shadow disabled:opacity-50"
             />
           </div>
           <p className="mt-4">

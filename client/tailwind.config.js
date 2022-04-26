@@ -2,6 +2,57 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      colors: {
+        black: "#000000",
+        white: "#ffffff",
+        "red-luke": {
+          default: "#D32F2F",
+          lighter: "#FCF3F3",
+          chargeback: "rgba(211, 47, 47, 0.1)",
+          dm: "#EF9A9A",
+        },
+        green: "#00f78c",
+        "green-luke": {
+          default: "#8BC34A",
+          lighter: "#F6FBF6",
+        },
+
+        "yellow-luke": {
+          default: "#fbc02d",
+          lighter: "#FEF9F3",
+          dm: "#FFF59D",
+        },
+        "yellow-su": "#F2D03B",
+        "orange-luke": {
+          default: "#EF9B38",
+        },
+        transparent: "transparent",
+        snow: {
+          default: "#ffffff",
+          70: "rgba(255, 255, 255, 0.7)",
+          80: "rgba(255, 255, 255, 0.8)",
+          30: "rgba(255, 255, 255, 0.3)",
+          10: "rgba(255, 255, 255, 0.1)",
+        },
+        "grey-whisper": "#EBEBEB",
+        "grey-ned": "#F8F9FA",
+        "grey-jon": "#F4F4F5",
+        "grey-bran": "#EFF2F4",
+        "grey-arya": "#EAEDF0",
+        "grey-robb": "#E5E5E6",
+        "grey-theon": "#d1d1d1",
+        "grey-drogo": "#CDCDCE",
+        "grey-davos": "#9c9c9c",
+        "grey-melisandre": "#688796",
+        "grey-li": "#607D8D",
+        'grey-yoda': '#212121',
+        "black-12dp": "#333333",
+        "black-24dp": "#383838",
+        "snow-dp": "#E0E0E0",
+        "snow-ds": "#A0A0A0",
+        "snow-dd": "#6C6C6C",
+        "grey-dm": "#434343",
+      },
       screens: {
         xsm: "420px",
         sm: "640px",

@@ -62,7 +62,7 @@ function Login() {
               value="Log in"
               className="submit px-4 py-2 rounded-lg
               cursor-pointer
-              bg-green-500 text-white shadow disabled:opacity-50"
+              bg-green text-white shadow disabled:opacity-50"
             />
           </div>
           <p className="mt-4">
