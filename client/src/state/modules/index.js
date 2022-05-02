@@ -1,1 +1,2 @@
-export { default as login } from "./login/reducers";
+export { default as auth } from "./auth/reducers";
+export { default as request } from "./request/reducers";

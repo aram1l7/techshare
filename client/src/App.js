@@ -13,7 +13,8 @@ function App() {
       {ReactDOM.createPortal(
         <ToastContainer
           className="toaster"
-          autoClose={false}
+          autoClose={4000}
+          hideProgressBar
         />,
         document.getElementById("toasts")
       )}

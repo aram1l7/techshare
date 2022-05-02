@@ -1,0 +1,3 @@
+export const REGISTER_COMPLETED = "auth/REGISTER_COMPLETED";
+export const REGISTER_FAILED = "auth/REGISTER_FAILED";
+

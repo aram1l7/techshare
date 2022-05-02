@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import register from "assets/images/register.svg";
-import toast from "helpers/toast";
+import { useDispatch, useSelector } from "react-redux";
+import { registerOperation } from "state/modules/auth/operations";
+import { namedRequestsInProgress } from "state/modules/request/selectors";
+import { requestsEnum } from "state/modules/requestsEnum";
 function Register() {
   const [formData, setFormData] = useState({
     name: "",
@@ -22,19 +25,19 @@ function Register() {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [isPasswordOpen, setIsPasswordOpen] = useState(false);
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
-
+  const isLoading = useSelector((state) =>
+    namedRequestsInProgress(state, requestsEnum().register)
+  );
+  const dispatch = useDispatch();
   useEffect(() => {
-    if (name.length >= 3 && password.length >= 3) {
+    if (name.length > 0 && password.length > 0) {
       setIsButtonDisabled(false);
     }
   }, [formData]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      console.log('asdasdasd');
-      toast.success('Passwords do not match');
-    }
+    dispatch(registerOperation(formData));
   };
 
   return (
@@ -96,14 +99,18 @@ function Register() {
             />
           </div>
           <div className="mt-5">
-            <input
-              type="submit"
-              value="Create account"
-              disabled={isButtonDisabled}
-              className="submit px-4 py-2 rounded-lg
+            {isLoading ? (
+              <div className="px-4 py-2 rounded-lg bg-grey-dm">Loading...</div>
+            ) : (
+              <input
+                type="submit"
+                value="Create account"
+                disabled={isButtonDisabled}
+                className="submit px-4 py-2 rounded-lg
               cursor-pointer
               bg-green text-white shadow disabled:opacity-50"
-            />
+              />
+            )}
           </div>
           <p className="mt-4">
             Already have an account ?{" "}
