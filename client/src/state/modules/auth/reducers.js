@@ -6,7 +6,6 @@ import initialState from "./initialState";
 const reducersMap = {
   [types.REGISTER_COMPLETED]: (state, action) => {
     const { payload } = action;
-    localStorage.setItem("token", payload.token);
     return {
       ...state,
       ...payload,
@@ -14,7 +13,6 @@ const reducersMap = {
     };
   },
   [types.REGISTER_FAILED]: (state) => {
-    localStorage.removeItem("token");
     return {
       ...state,
       token: null,
